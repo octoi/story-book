@@ -16,7 +16,10 @@ if (process.env.NODE_ENV == 'development') {
 
 // Handlebars
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
-app.set('view-engine', '.hbs');
+app.set('view engine', '.hbs');
+
+// Routes
+app.use('/', require('./routes/index'));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`[+] Server started at http://localhost:${port}/`));
