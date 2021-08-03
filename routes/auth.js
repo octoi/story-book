@@ -9,6 +9,11 @@ router.get('/google/callback',
     (req, res) => {
         res.redirect('/dashboard');
     }
-);
+)
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+})
 
 module.exports = router;
