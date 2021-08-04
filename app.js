@@ -5,7 +5,9 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const connectDb = require('./config/db');
+const mongoose = require('mongoose');
 
 dotenv.config({ path: './config/config.env' });
 
@@ -28,6 +30,7 @@ app.use(session({
     secret: 'superSecretStuff',
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create(mongoose.connection),
 }));
 
 // Passport mw
