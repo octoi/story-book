@@ -7,5 +7,4 @@ router.get('/add', ensureAuth, (req, res) => {
     res.render('stories/add')
 })
 
-
 module.exports = router;
