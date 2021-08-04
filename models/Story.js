@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+
+const mongoose = require('mongoose')
 
 const StorySchema = new mongoose.Schema({
     title: {
@@ -12,18 +13,17 @@ const StorySchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        required: true,
-        default: false,
-        enum: ['public', 'private']
+        default: 'public',
+        enum: ['public', 'private'],
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
     },
     createdAt: {
         type: Date,
         default: Date.now,
-    }
+    },
 })
 
-module.exports = mongoose.model('story', StorySchema);
+module.exports = mongoose.model('Story', StorySchema)
