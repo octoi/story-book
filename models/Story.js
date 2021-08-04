@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose')
 
 const StorySchema = new mongoose.Schema({
@@ -16,9 +15,18 @@ const StorySchema = new mongoose.Schema({
         default: 'public',
         enum: ['public', 'private'],
     },
+    // user: {
+    //     id: mongoose.Schema.Types.ObjectId,
+    //     googleId: String,
+    //     displayName: String,
+    //     firstName: String,
+    //     lastName: String,
+    //     image: String,
+    //     createdAt: Date
+    // },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'user',
     },
     createdAt: {
         type: Date,
