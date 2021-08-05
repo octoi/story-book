@@ -63,7 +63,11 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use((req, res, next) => {
+    res.locals.user = req.user || null
+    next()
+}) // setting global variable
+app.use(express.static(path.join(__dirname, 'public'))) // public folder
 
 // Routes
 app.use('/', require('./routes/index'));
