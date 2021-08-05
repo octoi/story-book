@@ -56,14 +56,12 @@ router.get('/user/:userId', ensureAuth, async (req, res) => {
         const stories = await Story.find({
             user: req.params.userId,
             status: 'public',
-        })
-            .populate('user')
-            .lean()
+        }).populate('user').lean()
 
-        res.render('stories/index', {
-            stories,
-        })
+        res.render('stories/index', { stories })
+
     } catch (err) {
+        console.log('[-] Failed to get user story')
         console.error(err)
         res.render('error/500')
     }
