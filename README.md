@@ -1,4 +1,4 @@
-# Stories 🌷
+# Story Book 📖
 
 An app to share stories publicly or privately
 
