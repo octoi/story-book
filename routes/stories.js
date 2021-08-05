@@ -27,13 +27,25 @@ router.get('/', ensureAuth, async (req, res) => {
             .sort({ createdAt: 'desc' })
             .lean()
 
-        console.log(stories)
-
-        res.render('stories/index', {
-            stories,
-        })
+        res.render('stories/index', { stories })
     } catch (err) {
         console.log(`[-] Failed to get stories`)
+        console.error(err)
+        res.render('error/500')
+    }
+})
+
+router.get('/edit/:id', ensureAuth, async (req, res) => {
+    try {
+        const story = await Story.findOne({ _id: req.params.id }).lean()
+
+        if (!story) return res.render('error/404');
+        if (story.user != req.user.id) return res.redirect('/stories');
+
+        res.render('stories/edit', { story })
+
+    } catch (err) {
+        console.log(`[-] Failed to get story`)
         console.error(err)
         res.render('error/500')
     }
