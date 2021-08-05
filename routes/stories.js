@@ -82,6 +82,7 @@ router.delete('/:id', ensureAuth, async (req, res) => {
         await Story.remove({ _id: req.params.id })
         res.redirect('/dashboard')
     } catch (err) {
+        console.log('[-] Failed to delete story')
         console.error(err)
         return res.render('error/500')
     }
