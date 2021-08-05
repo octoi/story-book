@@ -51,5 +51,26 @@ router.get('/edit/:id', ensureAuth, async (req, res) => {
     }
 })
 
+router.put('/:id', ensureAuth, async (req, res) => {
+    try {
+        let story = await Story.findById(req.params.id).lean();
+
+        if (!story) return res.render('error/404');
+        if (story.user != req.user.id) return res.redirect('/stories')
+
+        story = await Story.findOneAndUpdate({ _id: req.params.id }, req.body, {
+            new: true,
+            runValidators: true,
+        })
+
+        res.redirect('/dashboard')
+
+    } catch (err) {
+        console.log(`[-] Failed to get story`)
+        console.error(err)
+        res.render('error/500')
+    }
+})
+
 
 module.exports = router;
